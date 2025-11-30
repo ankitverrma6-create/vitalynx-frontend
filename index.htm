@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Vitalynx – AI-Powered Hospital Management SaaS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Vitalynx is an AI-powered, multi-tenant SaaS hospital management platform that helps hospitals go digital in 24 hours with zero training." />
+
+<style>
+:root {
+--primary: #0466c8;
+--primary-light: #e3f2ff;
+--accent: #00b894;
+--dark: #0b1b2b;
+--text: #222;
+--muted: #666;
+--bg: #f5f7fb;
+--white: #ffffff;
+--radius: 10px;
+--shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+background: var(--bg);
+color: var(--text);
+line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* NAVBAR */
+header {
+position: sticky;
+top: 0;
+z-index: 100;
+background: rgba(255,255,255,0.96);
+backdrop-filter: blur(8px);
+box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.nav {
+max-width: 1100px;
+margin: 0 auto;
+padding: 12px 18px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 8px;
+font-weight: 700;
+color: var(--primary);
+letter-spacing: 0.5px;
+}
+
+.logo-badge {
+width: 32px;
+height: 32px;
+border-radius: 9px;
+background: linear-gradient(135deg, #0466c8, #00b894);
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 18px;
+box-shadow: var(--shadow);
+}
+
+nav ul {
+list-style: none;
+display: flex;
+gap: 18px;
+}
+
+nav a {
+font-size: 14px;
+color: var(--muted);
+font-weight: 500;
+}
+
+nav a:hover {
+color: var(--primary);
+}
+
+.nav-cta {
+padding: 8px 14px;
+border-radius: 999px;
+background: var(--primary);
+color: white;
+font-size: 13px;
+font-weight: 600;
+box-shadow: 0 6px 18px rgba(4,102,200,0.4);
+}
+
+.nav-cta:hover {
+background: #02479b;
+}
+
+/* HERO */
+.hero {
+max-width: 1100px;
+margin: 0 auto;
+padding: 60px 18px 40px;
+display: grid;
+grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+gap: 40px;
+align-items: center;
+}
+
+.badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 4px 10px;
+border-radius: 999px;
+background: var(--primary-light);
+color: var(--primary);
+font-size: 11px;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 12px;
+}
+
+.hero h1 {
+font-size: 38px;
+line-height: 1.15;
+color: var(--dark);
+margin-bottom: 12px;
+}
+
+.hero h1 span {
+color: var(--primary);
+}
+
+.hero p {
+font-size: 15px;
+color: var(--muted);
+margin-bottom: 22px;
+}
+
+.hero-actions {
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+margin-bottom: 12px;
+}
+
+.btn-primary {
+padding: 11px 20px;
+border-radius: 999px;
+background: var(--primary);
+color: white;
+font-weight: 600;
+font-size: 14px;
+border: none;
+cursor: pointer;
+box-shadow: 0 10px 24px rgba(4,102,200,0.45);
+}
+
+.btn-primary:hover {
+background: #02479b;
+}
+
+.btn-ghost {
+padding: 11px 20px;
+border-radius: 999px;
+border: 1px solid rgba(4,102,200,0.2);
+background: rgba(255,255,255,0.8);
+font-size: 14px;
+font-weight: 600;
+color: var(--primary);
+cursor: pointer;
+}
+
+.hero-meta {
+font-size: 11px;
+color: var(--muted);
+}
+
+.tagline {
+font-style: italic;
+font-size: 12px;
+color: var(--accent);
+margin-top: 6px;
+}
+
+.hero-card {
+background: var(--white);
+border-radius: 18px;
+padding: 20px 20px 18px;
+box-shadow: var(--shadow);
+border: 1px solid #e0e7ff;
+}
+
+.hero-card h3 {
+font-size: 16px;
+margin-bottom: 10px;
+color: var(--dark);
+}
+
+.hero-card p {
+font-size: 13px;
+color: var(--muted);
+margin-bottom: 10px;
+}
+
+.hero-list {
+list-style: none;
+font-size: 13px;
+color: var(--text);
+}
+
+.hero-list li {
+display: flex;
+align-items: flex-start;
+gap: 8px;
+margin-bottom: 8px;
+}
+
+.hero-pill {
+display: inline-block;
+margin-top: 8px;
+font-size: 11px;
+border-radius: 999px;
+padding: 4px 9px;
+background: var(--primary-light);
+color: var(--primary);
+font-weight: 600;
+}
+
+/* GENERIC SECTIONS */
+section {
+padding: 50px 18px;
+}
+
+.section-inner {
+max-width: 1100px;
+margin: 0 auto;
+}
+
+.section-header {
+text-align: center;
+margin-bottom: 30px;
+}
+
+.section-header h2 {
+font-size: 22px;
+color: var(--dark);
+margin-bottom: 6px;
+}
+
+.section-header p {
+font-size: 13px;
+color: var(--muted);
+}
+
+/* FEATURES GRID */
+.grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 18px;
+}
+
+.card {
+background: var(--white);
+border-radius: var(--radius);
+padding: 16px 16px 14px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+border: 1px solid #edf0ff;
+font-size: 13px;
+}
+
+.card h3 {
+font-size: 14px;
+color: var(--dark);
+margin-bottom: 6px;
+}
+
+.pill {
+display: inline-block;
+font-size: 10px;
+padding: 3px 7px;
+border-radius: 999px;
+background: var(--primary-light);
+color: var(--primary);
+margin-bottom: 6px;
+font-weight: 600;
+letter-spacing: 0.5px;
+}
+
+/* AI SECTION */
+.ai-section {
+background: var(--primary);
+color: white;
+}
+
+.ai-layout {
+display: grid;
+grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+gap: 26px;
+align-items: center;
+}
+
+.ai-points li {
+margin-bottom: 8px;
+font-size: 13px;
+}
+
+.quote {
+font-size: 13px;
+font-style: italic;
+margin-top: 10px;
+opacity: 0.9;
+}
+
+.ai-card {
+background: rgba(255,255,255,0.1);
+border-radius: 16px;
+padding: 16px 18px;
+font-size: 13px;
+border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* ROLES */
+.roles-row {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+}
+
+.role-badge {
+padding: 7px 12px;
+border-radius: 999px;
+font-size: 12px;
+background: var(--white);
+border: 1px solid #e0e7ff;
+box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* WORKFLOW */
+.workflow-steps {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+margin-top: 15px;
+}
+
+.step {
+font-size: 12px;
+padding: 8px 11px;
+background: var(--white);
+border-radius: 999px;
+border: 1px dashed #d0d7ff;
+}
+
+/* PRICING */
+.pricing {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 16px;
+margin-top: 10px;
+}
+
+.plan {
+background: var(--white);
+border-radius: var(--radius);
+padding: 18px 16px;
+border: 1px solid #e0e7ff;
+text-align: left;
+font-size: 13px;
+}
+
+.plan h3 {
+font-size: 15px;
+margin-bottom: 4px;
+color: var(--dark);
+}
+
+.plan span {
+font-size: 11px;
+color: var(--muted);
+}
+
+.plan ul {
+margin-top: 8px;
+padding-left: 17px;
+}
+
+/* CTA */
+.cta {
+background: linear-gradient(135deg, #0466c8, #00b894);
+color: white;
+text-align: center;
+}
+
+.cta h2 {
+font-size: 22px;
+margin-bottom: 6px;
+}
+
+.cta p {
+font-size: 13px;
+margin-bottom: 16px;
+opacity: 0.94;
+}
+
+/* FOOTER */
+footer {
+padding: 20px 18px 28px;
+font-size: 11px;
+color: var(--muted);
+text-align: center;
+}
+
+footer a {
+color: var(--primary);
+margin: 0 6px;
+font-size: 11px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+.hero {
+grid-template-columns: minmax(0, 1fr);
+}
+.hero {
+padding-top: 40px;
+}
+.hero-card {
+margin-top: -10px;
+}
+.ai-layout {
+grid-template-columns: minmax(0, 1fr);
+}
+.grid {
+grid-template-columns: repeat(2, minmax(0,1fr));
+}
+.pricing {
+grid-template-columns: minmax(0,1fr);
+}
+nav ul {
+display: none; /* simple mobile nav: only logo + CTA */
+}
+}
+
+@media (max-width: 540px) {
+.grid {
+grid-template-columns: minmax(0,1fr);
+}
+.hero h1 {
+font-size: 30px;
+}
+.hero {
+padding-inline: 14px;
+}
+section {
+padding-inline: 14px;
+}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER / NAV -->
+<header>
+<div class="nav">
+<div class="logo">
+<div class="logo-badge">V</div>
+<div>Vitalynx</div>
+</div>
+<nav>
+<ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#ai">AI Assistant</a></li>
+<li><a href="#workflow">Workflow</a></li>
+<li><a href="#pricing">Pricing</a></li>
+</ul>
+</nav>
+<a href="#cta" class="nav-cta">Start Free Demo</a>
+</div>
+</header>
+
+<!-- HERO -->
+<main>
+<section class="hero">
+<div>
+<div class="badge">
+<span>New</span>
+<span>AI-Powered Hospital SaaS</span>
+</div>
+<h1>Digitize your hospital in <span>24 hours</span> with AI.</h1>
+<p>
+Vitalynx is a cloud-based, multi-tenant Hospital Management System that helps
+hospitals of any size go paperless, connect departments, and assist staff using AI –
+without heavy training or infrastructure.
+</p>
+<div class="hero-actions">
+<button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+🚀 Start Free Demo
+</button>
+<button class="btn-ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+View Features
+</button>
+</div>
+<div class="hero-meta">
+Multi-tenant • Role-based access • OAuth2 + JWT • Redis optimized
+<div class="tagline">
+“Software doesn’t train people. In Vitalynx, AI trains the staff.”
+</div>
+</div>
+</div>
+
+<aside class="hero-card">
+<h3>Hospital at a glance</h3>
+<p>An example day with Vitalynx:</p>
+<ul class="hero-list">
+<li>✅ Reception registers patient in seconds (OPD/IPD)</li>
+<li>✅ Doctor sees AI-powered summary of previous visits</li>
+<li>✅ Lab & Pharmacy receive orders instantly</li>
+<li>✅ AI assistant explains prescriptions in plain language</li>
+</ul>
+<span class="hero-pill">Multi-tenant • AI Assistant • Zero Training</span>
+</aside>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+<div class="section-inner">
+<div class="section-header">
+<h2>All core features from the HMS requirements document.</h2>
+<p>Fully aligned with FR-1 to FR-11 plus additional AI capabilities.</p>
+</div>
+
+<div class="grid">
+<div class="card">
+<span class="pill">FR-1</span>
+<h3>Hospital Self-Registration</h3>
+<p>
+Hospitals self-onboard by sharing name, address, contact & license details.
+Tenant ID is auto-generated and admin account created instantly.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">FR-2</span>
+<h3>Multi-Tenant Isolation</h3>
+<p>
+Each hospital has isolated data (schema-per-tenant model). Tenant context comes
+from JWT token; cross-tenant access is blocked via middleware.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">FR-3</span>
+<h3>Secure OAuth2 + JWT</h3>
+<p>
+Access and refresh tokens with tenant ID, user ID, roles and permissions
+ensure secure, scalable authentication.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">FR-4/5</span>
+<h3>RBAC + ABAC</h3>
+<p>
+Role-Based (SUPER_ADMIN, HOSPITAL_ADMIN, DOCTOR, NURSE, etc.) and
+Attribute-Based access (department, shift, confidentiality) for fine-grained control.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">FR-6/7</span>
+<h3>User & Password Management</h3>
+<p>
+Admin-managed users with strong password policy, reset flows,
+and secure session invalidation on change.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">FR-8/9</span>
+<h3>Patient Lifecycle</h3>
+<p>
+OPD/IPD patient registration, unique patient IDs, search by ID, name, phone,
+plus department and doctor filters.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">FR-10</span>
+<h3>Prescription Management</h3>
+<p>
+Doctors record medicines, dosage, frequency, duration, and reuse templates
+for common prescriptions.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">FR-11</span>
+<h3>Dynamic Role-Based UI</h3>
+<p>
+Menus and screens adapt automatically to each role’s permissions —
+both on frontend and backend level.
+</p>
+</div>
+
+<div class="card">
+<span class="pill">Extra</span>
+<h3>AI Assistant Integration</h3>
+<p>
+On top of the core HMS, Vitalynx adds an AI assistant to guide, explain and
+summarize information for every role in the hospital.
+</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- AI SECTION -->
+<section id="ai" class="ai-section">
+<div class="section-inner ai-layout">
+<div>
+<div class="section-header" style="text-align:left;margin-bottom:14px;">
+<h2>AI Assistant for every role in the hospital.</h2>
+<p>Making the system usable even for completely non-technical staff.</p>
+</div>
+<ul class="ai-points">
+<li>💊 Explains prescriptions in simple English or Hindi for nurses and pharmacy.</li>
+<li>🧠 Summarizes patient’s previous visits for the doctor in one short view.</li>
+<li>📚 Teaches new staff how to use features with step-by-step guidance.</li>
+<li>🔔 Introduces new product updates and guides hospital teams through changes.</li>
+<li>🌐 Acts as multilingual support layer across the entire hospital workflow.</li>
+</ul>
+<div class="quote">
+“Instead of staff struggling to learn the software, Vitalynx makes the software
+intelligent enough to support the staff.”
+</div>
+</div>
+<div class="ai-card">
+<h3 style="margin-bottom:8px;">Example AI conversations</h3>
+<p><strong>Nurse:</strong> “Explain this prescription in Hindi for the patient.”<br/>
+<strong>AI:</strong> “Ye dawa subah aur raat khane ke baad leni hai, 5 din tak.”</p>
+<p style="margin-top:6px;"><strong>Doctor:</strong> “Show me a quick summary of the last 3 visits.”<br/>
+<strong>AI:</strong> “Patient visited 3 times in 6 months, main complaints: back pain, low Vitamin D…”</p>
+</div>
+</div>
+</section>
+
+<!-- ROLES -->
+<section>
+<div class="section-inner">
+<div class="section-header">
+<h2>Designed for the entire hospital ecosystem.</h2>
+<p>Every role gets only what they need, nothing more, nothing less.</p>
+</div>
+<div class="roles-row">
+<span class="role-badge">Super Admin</span>
+<span class="role-badge">Hospital Admin</span>
+<span class="role-badge">Doctor</span>
+<span class="role-badge">Nurse</span>
+<span class="role-badge">Lab Technician</span>
+<span class="role-badge">Pharmacist</span>
+<span class="role-badge">Receptionist</span>
+</div>
+</div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow">
+<div class="section-inner">
+<div class="section-header">
+<h2>OPD workflow – end-to-end digital.</h2>
+<p>How a typical patient journey looks inside Vitalynx.</p>
+</div>
+<div class="workflow-steps">
+<span class="step">1️⃣ Reception – Patient registration & ticket</span>
+<span class="step">2️⃣ Doctor – Consultation & prescriptions</span>
+<span class="step">3️⃣ Lab – Test orders & results</span>
+<span class="step">4️⃣ Pharmacy – Medicine dispensing</span>
+<span class="step">5️⃣ AI – Support, summary & guidance</span>
+</div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+<div class="section-inner">
+<div class="section-header">
+<h2>Pricing designed for every size of hospital.</h2>
+<p>From small clinics to large multi-branch hospital chains.</p>
+</div>
+<div class="pricing">
+<div class="plan">
+<h3>Starter</h3>
+<span>For single clinics</span>
+<ul>
+<li>Single tenant</li>
+<li>OPD workflows</li>
+<li>Basic AI assistant</li>
+</ul>
+</div>
+<div class="plan">
+<h3>Standard</h3>
+<span>For mid-size hospitals</span>
+<ul>
+<li>Full HMS modules</li>
+<li>Multi-department roles</li>
+<li>Advanced AI assistance</li>
+</ul>
+</div>
+<div class="plan">
+<h3>Enterprise</h3>
+<span>For hospital chains</span>
+<ul>
+<li>Multi-tenant, multi-branch</li>
+<li>Custom integrations</li>
+<li>Dedicated AI extensions</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta">
+<div class="section-inner">
+<h2>Ready to see Vitalynx in action?</h2>
+<p>Book a demo and we’ll walk you through a full AI-powered hospital journey in under 30 minutes.</p>
+<button class="btn-primary">📅 Schedule a Demo</button>
+</div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+© 2025 Vitalynx Healthcare Cloud • All rights reserved.
+<br/>
+<a href="#features">Features</a>•
+<a href="#ai">AI Assistant</a>•
+<a href="#pricing">Pricing</a>
+</footer>
+
+</body>
+</html>
+
